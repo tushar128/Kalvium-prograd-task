@@ -1,0 +1,66 @@
+Q2.
+You need to write the software to calculate the minimum number of 
+coins required to return an amount of change to a user of Acme 
+Vending machines. For example, the vending machine has coins 1,2,5 
+and 10 what is the minimum number of coins required to make up the 
+change of 43 cents?
+The coin denominations will be supplied as a parameter. This is so the 
+algorithm is not specific to one country. You may not hardcode these 
+into the algorithm, they must be passed as a parameter.
+The country’s denominations to use for the Question are:
+● British Pound ○ 1,2,5,10,20,50
+● US Dollar ○ 1,5,10,25
+● Norwegian Krone ○ 1,5,10,20
+The Question assumes an infinite number of coins of each 
+denomination. You are to return an array with each coin to be given as 
+change.
+Increment- Remove the assumption that there are infinite coins of 
+each denomination. Modify the code to accept a fixed number of each 
+denomination. It will affect the change calculation in that you now 
+need to consider the availability of coins when calculating change.
+
+ ###### sloution#######
+code:-
+#include <bits/stdc++.h>
+using namespace std;
+ 
+
+int denomination[]
+    = { 1,2,5,10,20,50};
+int n = sizeof(denomination) / sizeof(denomination[0]);
+ 
+void findMin(int V)
+{
+    sort(denomination, denomination + n);
+ 
+    // Initialize result
+    vector<int> ans;
+ 
+    // Traverse through all denomination
+    for (int i = n - 1; i >= 0; i--) {
+ 
+        // Find denominations
+        while (V >= denomination[i]) {
+            V -= denomination[i];
+            ans.push_back(denomination[i]);
+        }
+    }
+ 
+    // Print result
+    for (int i = 0; i < ans.size(); i++)
+        cout << ans[i] << " ";
+}
+ 
+// Driver Code
+int main()
+{
+    int n;
+    cout<<"ENTER THE AMT OF MONEY "<<endl;
+    cin>>n;
+    cout << "Following is minimal"
+         << " number of change for " << n << ": ";
+ 
+    // Function Call
+    findMin(n);
+    return 0;
+}
